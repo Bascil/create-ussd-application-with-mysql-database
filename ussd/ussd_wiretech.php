@@ -13,9 +13,9 @@
     header('Content-type: text/plain');
 
     /* Configure Database */
-     $conn = 'mysql:dbname=wiretech;host=127.0.0.1;'; //replace wiretech with your db name
-     $user = ''; // your mysql user 
-     $password = ''; // your mysql password
+     $conn = 'mysql:dbname=wiretech_ussd;host=127.0.0.1;'; //database name
+     $user = 'wiretech'; // your mysql user 
+     $password = 'h@cktivist1'; // your mysql password
      //  Create a PDO instance that will allow you to access your database
      try {
      $db = new PDO($conn, $user, $password);
@@ -233,7 +233,7 @@
             if($stmt->rowCount() > 0)
              {
 
-               
+                echo "END <ol>";
                  while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                  extract($row);
@@ -241,10 +241,10 @@
                  $phpdate=strtotime($date);
                  $new_date=date("d/m/Y", $phpdate);
                
-                echo "END".$row['event_name']. " is on ".$new_date."</li><br>"; 
+                echo "<li>".$row['event_name']. " is on ".$new_date."</li><br>"; 
                
              }
-             
+              echo "</ol>";
           }
           
          else {
@@ -254,7 +254,6 @@
             }
             
             
-        
          
       }  
 
@@ -262,7 +261,8 @@
     function fee_structure($details,$phone) {  
 
          if(count($details) == 1){  
-         $ussd_text = "Choose Class\n 1.Form 1\n 2.Form 2\n3.Form 3\n 4. Form 4\n "; 
+         $ussd_text = "Choose Class \n 1. Form 1 \n 2. Form 2 
+                       3. Form 3 \n 4. Form 4\n "; 
 
          ussd_proceed($ussd_text);  
         }  
